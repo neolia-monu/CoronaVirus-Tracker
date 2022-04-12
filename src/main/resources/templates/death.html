@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CoronaVirus Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <nav style="margin-top: 20px">
+        <ul class="nav nav-pills">
+            <li style="margin: 12px; font-size: 19px" role="presentation"><a href="/">Home</a></li>
+            <li style="margin: 12px; font-size: 19px" role="presentation" class="active"><a href="death">Death Cases</a></li>
+            <li style="margin: 12px; font-size: 19px" role="presentation"><a href="#">Recovered Global</a></li>
+        </ul>
+    </nav>
+
+    <h1>Coronavirus Tracker Application</h1>
+    <p>This application lists the current number of cases reported across the globe</p>
+
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+        <p class="lead">Total death reported as of today</p>
+        <hr class="my-4">
+        <p>
+            <span>New death reported since previous day:</span>
+            <span th:text="${totalNewCases}"></span>
+        </p>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Country</th>
+            <th>State</th>
+            <th>Total Death Reported</th>
+            <th>Changes since last day</th>
+        </tr>
+
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.state}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
